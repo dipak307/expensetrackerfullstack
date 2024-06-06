@@ -10,7 +10,7 @@ const PORT=process.env.PORT;
 ///middleware
 app.use(express.json())
  app.use(cors({
-       origin:"http://localhost:3001",
+       origin:"https://expensetrackerfullstack-ol1o.vercel.app",
        methods:['POST','GET'],
        credentials:true,
      }))
