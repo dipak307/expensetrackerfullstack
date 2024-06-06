@@ -15,7 +15,7 @@ if (!PORT) {
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: ['POST', 'GET'],
     credentials: true,
 }));
