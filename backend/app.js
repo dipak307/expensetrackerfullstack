@@ -1,35 +1,55 @@
-const express=require("express");
-const cors=require('cors');
-const {db}=require('./db/db')
-const app=express();
-const {readdirSync}=require('fs')
+const express = require("express");
+const cors = require('cors');
+const { db } = require('./db/db');
+const { readdirSync } = require('fs');
+require('dotenv').config();
 
- require('dotenv').config();
+const app = express();
+const PORT = process.env.PORT;
 
-const PORT=process.env.PORT;
-///middleware
-app.use(express.json())
-app.use(cors({
-        origin:"https://expensetrackerfullstack-ol1o.vercel.app",
-        methods:['POST','GET'],
-        credentials:true,
-      }))
-
-//routes
-readdirSync('./routes').map((route) => app.use('/api/v1' , require('./routes/' + route)))
-
-app.get('/',(req,res)=>{
-    res.send("hellow world");
-})
-
-const server=()=>{
-    db()
-    app.listen(PORT,()=>{
-        console.log('listening to ports:' , PORT)
-    })
+if (!PORT) {
+    console.error('PORT environment variable is not defined');
+    process.exit(1); // Exit the process with an error code
 }
 
-server();
+// Middleware
+app.use(express.json());
+app.use(cors({
+    origin: "http://localhost:3000",
+    methods: ['POST', 'GET'],
+    credentials: true,
+}));
+
+// Routes
+readdirSync('./routes').forEach(route => {
+    app.use('/api/v1', require(`./routes/${route}`));
+});
+
+// Test route
+app.get('/', (req, res) => {
+    res.send("Hello world");
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+// Start the server
+const startServer = async () => {
+    try {
+        await db(); // Ensure the database connection is established before starting the server
+        app.listen(PORT, () => {
+            console.log('Listening to port:', PORT);
+        });
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1); // Exit the process with an error code
+    }
+};
+
+startServer();
 
 
 
