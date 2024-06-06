@@ -9,7 +9,11 @@ const {readdirSync}=require('fs')
 const PORT=process.env.PORT;
 ///middleware
 app.use(express.json())
- app.use(cors())
+app.use(cors({
+        origin:"https://expensetrackerfullstack-ol1o.vercel.app",
+        methods:['POST','GET'],
+        credentials:true,
+      }))
 
 //routes
 readdirSync('./routes').map((route) => app.use('/api/v1' , require('./routes/' + route)))
