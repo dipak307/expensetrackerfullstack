@@ -17,7 +17,7 @@ if (!PORT) {
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: 'https://expensetrackerfullstack-ol1o.vercel.app',
+    origin: 'https://expensetrackerfullstack-ol1o.vercel.app/',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
 }))
