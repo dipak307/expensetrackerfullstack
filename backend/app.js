@@ -1,7 +1,9 @@
+
 const express = require("express");
 const cors = require('cors');
 const { db } = require('./db/db');
 const { readdirSync } = require('fs');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -20,9 +22,22 @@ app.use(cors({
     credentials: true
 }))
 
+// Absolute path to the routes directory
+const routesPath = path.resolve(__dirname, 'routes');
+
+// Debugging the path
+console.log(`Routes directory path: ${routesPath}`);
+
+// Check if the directory exists
+const fs = require('fs');
+if (!fs.existsSync(routesPath)) {
+    console.error('Routes directory does not exist');
+    process.exit(1);
+}
+
 // Routes
-readdirSync('./routes').forEach(route => {
-    app.use('/api/v1', require(`./routes/${route}`));
+readdirSync(routesPath).forEach(route => {
+    app.use('/api/v1', require(path.join(routesPath, route)));
 });
 
 // Test route
@@ -50,12 +65,3 @@ const startServer = async () => {
 };
 
 startServer();
-
-
-
-
-
-
-
-
-
