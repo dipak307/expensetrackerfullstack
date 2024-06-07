@@ -59,17 +59,19 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-// Start the server
-const startServer = async () => {
-    try {
-        await db(); // Ensure the database connection is established before starting the server
-        app.listen(PORT, () => {
-            console.log('Listening to port:', PORT);
-        });
-    } catch (error) {
-        console.error('Failed to start server:', error);
-        process.exit(1); // Exit the process with an error code
-    }
-};
+module.exports = app; // Export the Express app
 
-startServer();
+// Start the server (remove this block from here)
+// const startServer = async () => {
+//     try {
+//         await db(); // Ensure the database connection is established before starting the server
+//         app.listen(PORT, () => {
+//             console.log('Listening to port:', PORT);
+//         });
+//     } catch (error) {
+//         console.error('Failed to start server:', error);
+//         process.exit(1); // Exit the process with an error code
+//     }
+// };
+
+// startServer(); // Remove this line
