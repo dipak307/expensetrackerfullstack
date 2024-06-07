@@ -1,4 +1,3 @@
-
 const express = require("express");
 const cors = require('cors');
 const { db } = require('./db/db');
@@ -17,10 +16,22 @@ if (!PORT) {
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: 'https://expensetrackerfullstack-ol1o.vercel.app/',
+    origin: 'https://expensetrackerfullstack-ol1o.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
-}))
+}));
+
+// Handle preflight requests
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://expensetrackerfullstack-ol1o.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
 
 // Absolute path to the routes directory
 const routesPath = path.resolve(__dirname, 'routes');
