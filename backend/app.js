@@ -17,7 +17,7 @@ if (!PORT) {
 app.use(express.json());
 
 // CORS Configuration
-const allowedOrigins = ['https://expensetrackerfullstack-ol1o.vercel.app'];
+const allowedOrigins = ['https://expensetrackerfullstack-frontend.vercel.app'];
 app.use(cors({
     origin: (origin, callback) => {
         if (allowedOrigins.includes(origin) || !origin) {
