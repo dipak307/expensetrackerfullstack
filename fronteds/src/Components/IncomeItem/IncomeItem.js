@@ -4,6 +4,7 @@ import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food,
 import Button from '../Button/Button';
 import { dateFormate } from '../../utils/dateFormate';
 
+///destructured this items from income
 const IncomeItem = ({
     id,
     title,
@@ -62,7 +63,7 @@ const IncomeItem = ({
         }
     }
    
-console.log('type',type)
+// console.log('type',type)
 
   return (
     <IncomeItemStyled indicator={indicatorColor}>
@@ -70,7 +71,7 @@ console.log('type',type)
              {type === 'expense' ? expenseCatIcon() : categoryIcon()}
         </div>
         <div className='content'>
-          <h5>{}{title}</h5>
+          <h5>{title}</h5>
           <div className='inner-content'>
                   <div className='text'>
                    <p>{dollar} {amount}</p>
