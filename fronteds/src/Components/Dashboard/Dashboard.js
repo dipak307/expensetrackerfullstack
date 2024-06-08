@@ -6,9 +6,7 @@ import { useGlobalContext } from '../../context/globalContext';
 import { dollar } from '../../utils/Icons';
 import History from '../History/History';
 const Dashboard = () => {
-
      const {incomes,expenses,totalExpenses,totalIncome,totalBalance,getIncomes,getExpenses}=useGlobalContext();
-
      useEffect(()=>{
             getIncomes()
             getExpenses()
