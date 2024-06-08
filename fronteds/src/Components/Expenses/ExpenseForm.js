@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from '../../context/globalContext';
 import Button from '../Button/Button';
 import { plus } from '../../utils/Icons';
-
+////this is 
 const ExpenseForm = () => {
         const {addExpense,error,setError}=useGlobalContext();
     const [inputState,setInputState]=useState({
