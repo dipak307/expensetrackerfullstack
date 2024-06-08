@@ -6,7 +6,7 @@ import { signout } from "../../utils/Icons";
 
 const Navigation = ({active,setActive}) => {
       
-      console.log(active);
+      // console.log(active);
 
   return (
     <NavStyled>
