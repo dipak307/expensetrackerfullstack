@@ -1,7 +1,4 @@
  import { useEffect, useState } from "react";
-
-
- 
  export const useWindowSize =()=>{
       const [size,setSize]=useState([0,0]);
  
