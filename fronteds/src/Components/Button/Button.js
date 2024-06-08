@@ -29,3 +29,7 @@ const Button = ({name , icon, onClick ,bg,bPad,color,bRad}) => {
     background-color:green
  `
  export default Button;
+
+
+
+ 
